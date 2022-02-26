@@ -21,12 +21,11 @@ pip install newsapi-python
 
 ## Preparation
 
-Import scipy, seaborn, numpy, pandas, matplotlib, datetime, haversine.
+Import newsapi, flask.
 
 ```python
-from scipy import stats
 from flask import Flask, render_template, redirect, flash, jsonify, session, request
-
+from newsapi import NewsApiClient
 ```
 
 ## Execution
