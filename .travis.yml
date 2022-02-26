@@ -1,0 +1,11 @@
+# Travis CI configuration file
+# See https://docs.travis-ci.com/user/tutorial/
+language: python
+
+matrix:
+  include:
+    - python: 3.8.5
+    - python: 3.9
+
+install:
+  - pip install -r requirements.txt
