@@ -4,7 +4,6 @@ from dash import Dash, Input, Output, html
 from newsapi import NewsApiClient
 import outline
 
-
 # API CALL
 
 

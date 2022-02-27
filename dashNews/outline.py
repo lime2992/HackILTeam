@@ -3,6 +3,10 @@ import dash_bootstrap_components as dbc
 from newsapi import NewsApiClient
 from dash import Dash, Input, Output, html
 
+from dashNews.tweets import get_trending_tweets
+
+tweets = get_trending_tweets()
+print(tweets)
 
 app = dash.Dash(
     external_stylesheets=[dbc.themes.BOOTSTRAP]
@@ -82,18 +86,67 @@ newsCards = dbc.Accordion(
                     title=top['articles'][4]['title'],
                     item_id="item-5",
                 ),
+                dbc.AccordionItem(
+                    generateCard(5),
+                    title=top['articles'][5]['title'],
+                    item_id="item-6",
+                ),
+                dbc.AccordionItem(
+                    generateCard(6),
+                    title=top['articles'][6]['title'],
+                    item_id="item-7",
+                ),
+                dbc.AccordionItem(
+                    generateCard(7),
+                    title=top['articles'][7]['title'],
+                    item_id="item-8",
+                ),
+                dbc.AccordionItem(
+                    generateCard(8),
+                    title=top['articles'][8]['title'],
+                    item_id="item-9",
+                ),
+                dbc.AccordionItem(
+                    generateCard(9),
+                    title=top['articles'][9]['title'],
+                    item_id="item-10",
+                ),
+                dbc.AccordionItem(
+                    generateCard(10),
+                    title=top['articles'][10]['title'],
+                    item_id="item-11",
+                ),
             ],
             id="accordion",
             active_item="item-1",
             flush=True,
             style={'width':"80%",}
         )
-        
+
+
+
 tweetList = dbc.ListGroup(
     [
-        dbc.ListGroupItem("Item 1"),
-        dbc.ListGroupItem("Item 2"),
-        dbc.ListGroupItem("Item 3"),
+        dbc.ListGroupItem([
+            html.Div(
+                [
+                    html.H5("Trending Tweets", className="mb-1"),
+                ],
+                className="d-flex w-100 justify-content-between",
+            ),
+        ]),
+        dbc.ListGroupItem(tweets[0]['name'], href=tweets[0]['url']),
+        dbc.ListGroupItem(tweets[1]['name'], href=tweets[1]['url']),
+        dbc.ListGroupItem(tweets[2]['name'], href=tweets[2]['url']),
+        dbc.ListGroupItem(tweets[3]['name'], href=tweets[3]['url']),
+        dbc.ListGroupItem(tweets[4]['name'], href=tweets[4]['url']),
+        dbc.ListGroupItem(tweets[5]['name'], href=tweets[5]['url']),
+        dbc.ListGroupItem(tweets[6]['name'], href=tweets[6]['url']),
+        dbc.ListGroupItem(tweets[7]['name'], href=tweets[7]['url']),
+        dbc.ListGroupItem(tweets[8]['name'], href=tweets[8]['url']),
+        dbc.ListGroupItem(tweets[9]['name'], href=tweets[9]['url']),
+        dbc.ListGroupItem(tweets[10]['name'], href=tweets[10]['url']),
+
     ],
     style={"width":"20%"}
 )
