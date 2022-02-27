@@ -1,24 +1,23 @@
 import dash
 import dash_bootstrap_components as dbc
 from newsapi import NewsApiClient
-from dash import Dash, Input, Output, html
+from dash import Dash, Input, Output, html, State, dcc
 
-from dashNews.tweets import get_trending_tweets
+#from dashNews.tweets import get_trending_tweets
 
-tweets = get_trending_tweets()
+#tweets = get_trending_tweets()
 
 app = dash.Dash(
     external_stylesheets=[dbc.themes.BOOTSTRAP]
 )
 
 
+
 api = NewsApiClient(api_key='c3714ae8334b4794b63ffc101502f54a')
 top = api.get_top_headlines()
 
 items = [
-    dbc.DropdownMenuItem("First"),
-    dbc.DropdownMenuItem(divider=True),
-    dbc.DropdownMenuItem("Second"),
+    "First","Second","Third"
 ]
 
 def generateCard(i):
@@ -124,30 +123,62 @@ newsCards = dbc.Accordion(
 
 
 
-tweetList = dbc.ListGroup(
-    [
-        dbc.ListGroupItem([
-            html.Div(
-                [
-                    html.H5("Trending Tweets", className="mb-1"),
-                ],
-                className="d-flex w-100 justify-content-between",
-            ),
-        ]),
-        dbc.ListGroupItem(tweets[0]['name'], href=tweets[0]['url']),
-        dbc.ListGroupItem(tweets[1]['name'], href=tweets[1]['url']),
-        dbc.ListGroupItem(tweets[2]['name'], href=tweets[2]['url']),
-        dbc.ListGroupItem(tweets[3]['name'], href=tweets[3]['url']),
-        dbc.ListGroupItem(tweets[4]['name'], href=tweets[4]['url']),
-        dbc.ListGroupItem(tweets[5]['name'], href=tweets[5]['url']),
-        dbc.ListGroupItem(tweets[6]['name'], href=tweets[6]['url']),
-        dbc.ListGroupItem(tweets[7]['name'], href=tweets[7]['url']),
-        dbc.ListGroupItem(tweets[8]['name'], href=tweets[8]['url']),
-        dbc.ListGroupItem(tweets[9]['name'], href=tweets[9]['url']),
-        dbc.ListGroupItem(tweets[10]['name'], href=tweets[10]['url']),
+#tweetList = dbc.ListGroup(
+#    [
+#        dbc.ListGroupItem([
+#            html.Div(
+#                [
+#                    html.H5("Trending Tweets", className="mb-1"),
+#                ],
+#                className="d-flex w-100 justify-content-between",
+#            ),
+#        ]),
+#        dbc.ListGroupItem(tweets[0]['name'], href=tweets[0]['url']),
+#        dbc.ListGroupItem(tweets[1]['name'], href=tweets[1]['url']),
+#        dbc.ListGroupItem(tweets[2]['name'], href=tweets[2]['url']),
+#        dbc.ListGroupItem(tweets[3]['name'], href=tweets[3]['url']),
+#       dbc.ListGroupItem(tweets[4]['name'], href=tweets[4]['url']),
+#       dbc.ListGroupItem(tweets[5]['name'], href=tweets[5]['url']),
+#       dbc.ListGroupItem(tweets[6]['name'], href=tweets[6]['url']),
+#       dbc.ListGroupItem(tweets[7]['name'], href=tweets[7]['url']),
+#      dbc.ListGroupItem(tweets[8]['name'], href=tweets[8]['url']),
+#       dbc.ListGroupItem(tweets[9]['name'], href=tweets[9]['url']),
+#       dbc.ListGroupItem(tweets[10]['name'], href=tweets[10]['url']),
+#
+#   ],
+#   style={"width":"20%"}
+#
 
-    ],
-    style={"width":"20%"}
+def generateLayout():
+	print("generate layout ran again")
+	app.layout = html.Div(
+	    [
+		dbc.Row(
+		    [
+		        dbc.Col(dbc.Input(id="searchField",placeholder="News topics", size="md", className="mb-3"),width="auto"),
+		        dbc.Col(dbc.Button("Go!", id="searchButton", className="me-2", n_clicks=0),width="auto"),
+		        dbc.Col(dcc.Dropdown(items,id="country",placeholder="CountryDrop"),width=3),
+		    ]
+		,justify="end"),
+		dbc.Row([html.H1("Top News Articles")]),
+		dbc.Row(
+		    [
+		        newsCards,
+		        #tweetList,
+		    ],
+		), html.Div(id="useless"),
+	    ]
+	)
+	
+	return app.layout
+	
+@app.callback(
+    Output("useless","children"),
+    Input("searchButton","n_clicks"),	
+    State("searchField", "value"),
+    State("country", "value"),
 )
-
-
+def newSearch(n_clicks,searchVal,value):
+	if(n_clicks != 0):
+		app.layout = generateLayout()
+		
