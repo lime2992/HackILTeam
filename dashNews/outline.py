@@ -6,7 +6,6 @@ from dash import Dash, Input, Output, html
 from dashNews.tweets import get_trending_tweets
 
 tweets = get_trending_tweets()
-print(tweets)
 
 app = dash.Dash(
     external_stylesheets=[dbc.themes.BOOTSTRAP]
