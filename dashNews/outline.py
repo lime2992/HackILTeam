@@ -58,64 +58,16 @@ def generateCard(i):
     
     return card
 
-newsCards = dbc.Accordion(
-            [
-                dbc.AccordionItem(
+news_articles = []
+for index, article in enumerate(top['articles']):
+    news_articles.append(dbc.AccordionItem(
                     generateCard(0),
-                    title=top['articles'][0]['title'],
-                    item_id="item-1",
-                ),
-                dbc.AccordionItem(
-                    generateCard(1),
-                    title=top['articles'][1]['title'],
-                    item_id="item-2",
-                ),
-                    dbc.AccordionItem(
-                    generateCard(2),
-                    title=top['articles'][2]['title'],
-                    item_id="item-3",
-                ),
-                    dbc.AccordionItem(
-                    generateCard(3),
-                    title=top['articles'][3]['title'],
-                    item_id="item-4",
-                ),
-                    dbc.AccordionItem(
-                    generateCard(4),
-                    title=top['articles'][4]['title'],
-                    item_id="item-5",
-                ),
-                dbc.AccordionItem(
-                    generateCard(5),
-                    title=top['articles'][5]['title'],
-                    item_id="item-6",
-                ),
-                dbc.AccordionItem(
-                    generateCard(6),
-                    title=top['articles'][6]['title'],
-                    item_id="item-7",
-                ),
-                dbc.AccordionItem(
-                    generateCard(7),
-                    title=top['articles'][7]['title'],
-                    item_id="item-8",
-                ),
-                dbc.AccordionItem(
-                    generateCard(8),
-                    title=top['articles'][8]['title'],
-                    item_id="item-9",
-                ),
-                dbc.AccordionItem(
-                    generateCard(9),
-                    title=top['articles'][9]['title'],
-                    item_id="item-10",
-                ),
-                dbc.AccordionItem(
-                    generateCard(10),
-                    title=top['articles'][10]['title'],
-                    item_id="item-11",
-                ),
-            ],
+                    title=top['articles'][index]['title'],
+                    item_id="item-{}".format(index),
+                ))
+
+newsCards = dbc.Accordion(
+            news_articles,
             id="accordion",
             active_item="item-1",
             flush=True,
@@ -145,7 +97,6 @@ tweetList = dbc.ListGroup(
         dbc.ListGroupItem(tweets[8]['name'], href=tweets[8]['url']),
         dbc.ListGroupItem(tweets[9]['name'], href=tweets[9]['url']),
         dbc.ListGroupItem(tweets[10]['name'], href=tweets[10]['url']),
-
     ],
     style={"width":"20%"}
 )
