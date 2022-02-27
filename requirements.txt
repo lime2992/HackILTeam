@@ -1,6 +1,6 @@
 # List of the pip packages that must be installed for this project to work.
 # (Travis CI will install these before it tries running your Doctests.)
-flask
 newsapi-python
-dash
+dash~=2.2.0
 dash-bootstrap-components
+requests~=2.27.1
