@@ -14,10 +14,7 @@ We created a web application by using Dash which is a Python framework for build
 Use the package manager [pip](https://pip.pypa.io/en/stable/) to install some modules.
 
 ```bash
-pip install dash
-pip install ash-bootstrap-components
-pip install newsapi-python
-pip install requests
+pip install -r requirements.txt
 ```
 
 ## Preparation
