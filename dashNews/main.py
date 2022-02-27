@@ -2,17 +2,33 @@ import outline
 import dash_bootstrap_components as dbc
 from dash import dcc, Input, Output, html, State
 
+navbar = dbc.Navbar(
+    dbc.Container(
+        [
+            html.A('NewsFlow', style={'color': 'white', 'fontSize': 45, 'font-weight': 'bold', 'marginRight': 150,
+                                      'padding-right': 60}),
+
+
+            dbc.Col(dbc.Input(id="searchField", placeholder="News topics", size="md", className="mb-3",
+                              style={'width': 500, 'height': 40, 'marginTop': 20, 'marginRight': 20}), width="auto"),
+            dbc.Col(dcc.Dropdown(outline.items, id="country", placeholder="CountryDrop", style={'height': 40,
+                                                                                                'marginRight': 20,
+                                                                                                'marginTop': 4}),
+                    width=3),
+            dbc.Col(dbc.Button("Go!", id="searchButton", className="me-2", n_clicks=0, style={'width': 60,
+                                                                                              'height': 40})),
+
+        ]
+    ),
+    color="dark",
+    dark=True,
+)
+
 outline.app.layout =  html.Div(
         [
-            dbc.Row(
-                [
-                    dbc.Col(dbc.Input(id="searchField", placeholder="News topics", size="md", className="mb-3"),
-                            width="auto"),
-                    dbc.Col(dbc.Button("Go!", id="searchButton", className="me-2", n_clicks=0), width="auto"),
-                    dbc.Col(dcc.Dropdown(outline.items, id="country", placeholder="CountryDrop"), width=3),
-                ]
-                , justify="end"),
-            dbc.Row([html.H1("Top News Articles", id="title")]),
+            navbar,
+            dbc.Row([html.H1("Top News Articles",id="title")], style={'marginLeft': 10, 'marginBottom': 10, 'marginTop': 25,
+                                                           'font-weight': 1000}),
             dbc.Row(
                 [
                     outline.newsCards,
@@ -30,12 +46,13 @@ outline.app.layout =  html.Div(
 
 @outline.app.callback(
         [Output('accordion', 'children'), Output('tweetList', 'children'), Output('title', 'children'), Output('set_graph','figure')],
-        Input('searchButton', 'n_clicks'),
+        Input("searchButton", 'n_clicks'),
         State("searchField", "value"),
         State("country", "value")
     )
 
 def updatePage(n_clicks, searchVal, countryVal):
+    print("update")
     new_title, tweets_title = outline.setVars(countryVal, searchVal)
     top = outline.top
     news_articles = []
@@ -60,10 +77,7 @@ def updatePage(n_clicks, searchVal, countryVal):
     for i in range(10):
         hold_tweet_list.append(dbc.ListGroupItem(tweets[i]['name'], href=tweets[0]['url']))
 
-
-
     return news_articles, hold_tweet_list, new_title, outline.generateChart(top)
-
 
 
 if __name__ == "__main__":

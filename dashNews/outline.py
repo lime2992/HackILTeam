@@ -178,7 +178,7 @@ newsCards = dbc.Accordion(
     id="accordion",
     active_item="item-1",
     flush=True,
-    style={'width': "80%", }
+    style={'width': "76%", }
 )
 
 hold_tweet_list = []
@@ -196,6 +196,6 @@ for i in range(10):
 
 tweetList = dbc.ListGroup(
     hold_tweet_list,
-    style={"width": "20%"},
+    style={"width": "20%","marginLeft":40},
     id="tweetList",
 )
