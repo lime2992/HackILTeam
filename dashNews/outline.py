@@ -38,6 +38,10 @@ def setVars(location, query):
     global top
     top = default_top
     tweets = default_tweets
+
+    search_res = "Top News Articles Worldwide"
+    tweets_res = "Trending Tweets Worldwide"
+
     if location is None:
         tweets = default_tweets
     else:
@@ -49,10 +53,22 @@ def setVars(location, query):
             tweets = get_trending_tweets(countries[location]["twitterid"])
             tweets_dict[location] = tweets
         print(tweets)
+        tweets_res = "Trending Tweets from {}".format(location)
 
     if query is not None and location is not None:
-        print(countries[location]["newsid"])
-        top = api.get_top_headlines(country=countries[location]["newsid"], q=query)
+        if query != '':
+            top = api.get_top_headlines(country=countries[location]["newsid"], q=query)
+            if not top['articles']:
+                if location in news_dict:
+                    top = news_dict[location]
+                else:
+                    top = api.get_top_headlines(country=countries[location]["newsid"])
+                    news_dict[location] = top
+                search_res = "Top News Articles from {}".format(location)
+            else:
+                search_res = "Top News Articles with '{}' from {}".format(query, location)
+        else:
+            query = None
 
     if query is None and location is not None:
         print(countries[location]["newsid"])
@@ -61,11 +77,18 @@ def setVars(location, query):
         else:
             top = api.get_top_headlines(country=countries[location]["newsid"])
             news_dict[location] = top
+        search_res = "Top News Articles from {}".format(location)
 
     if query is not None and location is None:
         top = api.get_top_headlines(q=query)
+        search_res = "Top News Articles with '{}' Worldwide".format(query)
 
+    if not top['articles']:
+        top = default_top
+        search_res = "Top News Articles Worldwide"
     print(top)
+
+    return search_res, tweets_res
 
 
 def generateCard(i):

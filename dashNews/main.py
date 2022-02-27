@@ -12,7 +12,7 @@ outline.app.layout =  html.Div(
                     dbc.Col(dcc.Dropdown(outline.items, id="country", placeholder="CountryDrop"), width=3),
                 ]
                 , justify="end"),
-            dbc.Row([html.H1("Top News Articles")]),
+            dbc.Row([html.H1("Top News Articles", id="title")]),
             dbc.Row(
                 [
                     outline.newsCards,
@@ -24,16 +24,14 @@ outline.app.layout =  html.Div(
     )
 
 @outline.app.callback(
-        [Output('accordion', 'children'),Output('tweetList', 'children')],
+        [Output('accordion', 'children'), Output('tweetList', 'children'), Output('title', 'children')],
         Input('searchButton', 'n_clicks'),
         State("searchField", "value"),
         State("country", "value")
     )
 
 def updatePage(n_clicks, searchVal, countryVal):
-    print(searchVal)
-    print(countryVal)
-    outline.setVars(countryVal, searchVal)
+    new_title, tweets_title = outline.setVars(countryVal, searchVal)
     top = outline.top
     news_articles = []
     for index, article in enumerate(top['articles']):
@@ -45,20 +43,19 @@ def updatePage(n_clicks, searchVal, countryVal):
 
     outline.setVars(countryVal, searchVal)
     tweets = outline.tweets
-    hold_tweet_list = []
-    hold_tweet_list.append(dbc.ListGroupItem([
+    hold_tweet_list = [dbc.ListGroupItem([
         html.Div(
             [
-                html.H5("Trending Tweets", className="mb-1"),
+                html.H5(tweets_title, className="mb-1"),
             ],
             className="d-flex w-100 justify-content-between",
         ),
-    ]), )
+    ])]
 
     for i in range(10):
         hold_tweet_list.append(dbc.ListGroupItem(tweets[i]['name'], href=tweets[0]['url']))
 
-    return news_articles,hold_tweet_list
+    return news_articles, hold_tweet_list, new_title
 
 
 
