@@ -3,6 +3,18 @@ import dash_bootstrap_components as dbc
 from newsapi import NewsApiClient
 from dash import dcc, Input, Output, html, State
 
+from IPython import display
+import math
+from pprint import pprint
+import pandas as pd
+import numpy as np
+import nltk
+import matplotlib.pyplot as plt
+import seaborn as sns
+import plotly.express as px
+import plotly.graph_objects as go
+from nltk.sentiment.vader import SentimentIntensityAnalyzer as SIA
+
 from dashNews.tweets import get_trending_tweets, get_countries
 
 app = dash.Dash(
@@ -32,6 +44,30 @@ tweets = get_trending_tweets(1)
 tweets_dict = {}
 news_dict = {}
 
+def generateChart(top):
+    headlines = set()
+
+    for title in top['articles']:
+        headlines.add(title['title'])
+
+    sia = SIA()
+    headlinesResults = []
+
+    for line in headlines:
+        pol_score_h = sia.polarity_scores(line)
+        pol_score_h['headline'] = line
+        headlinesResults.append(pol_score_h)
+    headlineDf = pd.DataFrame.from_records(headlinesResults)
+    sourceListDf = []
+    for source in top['articles']:
+        sourceListDf.append(source['source']['name'])
+    headlineDf["source"] = sourceListDf
+    headSent = px.scatter(headlineDf, x="pos", y="neg", color="source", labels={"pos":"Positive","neg":"Negative"})
+    headSent.update_traces(marker=dict(size=12),
+                           selector=dict(mode='markers'))
+    headSent.update_layout(title_text="Source Sentiment")
+
+    return headSent
 
 def setVars(location, query):
     global tweets
