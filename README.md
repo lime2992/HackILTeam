@@ -11,34 +11,37 @@ We created a web application by using Dash which is a Python framework for build
 
 
 ## Installation
-
 Use the package manager [pip](https://pip.pypa.io/en/stable/) to install some modules.
 
 ```bash
-pip install flask
+pip install dash
+pip install ash-bootstrap-components
 pip install newsapi-python
+pip install requests
 ```
 
 ## Preparation
-
-Import newsapi, flask.
+Import newsapi, dash, outline, dash_bootstrap_components, requests, base64.
 
 ```python
-from flask import Flask, render_template, redirect, flash, jsonify, session, request
 from newsapi import NewsApiClient
+
+import outline
+import dash
+import dash_bootstrap_components as dbc
+import requests
+import base64
 ```
 
 ## Execution
-
 Run the application with:
 ```
-(venv) $ python -m flask run
+(venv) $ python main.py
 ```
 
-Then you can open http://localhost:5000 to check the program.
+Then you can open http://localhost:XXXX to check the program.
 
 Now we are ready to go!
 
 ## Possible improvements
-
-XXXXX
+Probably would be cool to incorporate some analytics, improve UI/UX, and get more API requests.
