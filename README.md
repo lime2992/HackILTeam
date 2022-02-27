@@ -7,7 +7,7 @@ It is inconvenient that people will encounter problems when searching for news b
 This application will display the trending news and a search bar for users to type any words related to their desired news or articles and countries.
 
 #### How we built it:
-We created a web application by using Dash which is a Python framework for building reactive web apps, and then we used newsapi to return JSON search results for current news and top headlines. After data preprocessing, we displayed the contents based on the keywords and the condition that users gave.
+We created a web application by using Dash which is a Python framework for building reactive web apps, and then we used the News API to return JSON search results for current news and top headlines. Also, we implemented the Twitter API to get a list of Twitter trends related to the country selected. After data preprocessing, we displayed the contents based on the keywords and the condition that users gave.
 
 
 ## Installation
