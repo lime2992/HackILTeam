@@ -1,5 +1,5 @@
 # Newsflow
-#### Video Demo:  <https://youtu.be/XXXXXX>
+#### Video Demo:  <https://youtu.be/xU_-DQrv2LE>
 #### Inspiration:
 It is inconvenient that people will encounter problems when searching for news but there are various useless contents shown on their website. For example, when we use CNN to search for some topics about Ukraine, we have to go to the search page, and then it will display lots of news for us. However, we just want five to ten trending news so that we can immediately know about what's happening about that topic right now. The other thing is that we want to combat fake news and disinformation by using this app to expose people to various viewpoints.
 
