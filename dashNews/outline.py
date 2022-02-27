@@ -15,7 +15,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 from nltk.sentiment.vader import SentimentIntensityAnalyzer as SIA
 
-from dashNews.tweets import get_trending_tweets, get_countries
+from tweets import get_trending_tweets, get_countries
 
 app = dash.Dash(
     external_stylesheets=[dbc.themes.BOOTSTRAP]
