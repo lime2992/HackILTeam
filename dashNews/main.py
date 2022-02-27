@@ -36,7 +36,7 @@ def updatePage(n_clicks, searchVal, countryVal):
     news_articles = []
     for index, article in enumerate(top['articles']):
         news_articles.append(dbc.AccordionItem(
-            outline.generateCard(0),
+            outline.generateCard(index),
             title=top['articles'][index]['title'],
             item_id="item-{}".format(index),
         ))
