@@ -5,13 +5,13 @@ from dash import dcc, Input, Output, html, State
 navbar = dbc.Navbar(
     dbc.Container(
         [
-            html.A('NewsFlow', style={'color': 'white', 'fontSize': 45, 'font-weight': 'bold', 'marginRight': 150,
+            html.A('NewsFlow', style={'font-family': 'Kaushan Script','color': 'white', 'fontSize': 45, 'font-weight': 'bold', 'marginRight': 150,
                                       'padding-right': 60}),
 
 
             dbc.Col(dbc.Input(id="searchField", placeholder="News topics", size="md", className="mb-3",
                               style={'width': 500, 'height': 40, 'marginTop': 20, 'marginRight': 20}), width="auto"),
-            dbc.Col(dcc.Dropdown(outline.items, id="country", placeholder="CountryDrop", style={'height': 40,
+            dbc.Col(dcc.Dropdown(outline.items, id="country", placeholder="Country", style={'height': 40,
                                                                                                 'marginRight': 20,
                                                                                                 'marginTop': 4}),
                     width=3),
