@@ -3,10 +3,10 @@
 #### Inspiration:
 It is inconvenient that people will encounter problems when searching for news but there are various useless contents shown on their website. For example, when we use CNN to search for some topics about Ukraine, we have to go to the search page, and then it will display lots of news for us. However, we just want five to ten trending news so that we can immediately know about what's happening about that topic right now. The other thing is that we want to combat fake news and disinformation by using this app to expose people to various viewpoints.
 
-#### What it does
+#### What it does:
 This application will display the trending news and a search bar for users to type any words related to their desired news or articles and countries.
 
-#### How we built it
+#### How we built it:
 We created a web application by using Dash which is a Python framework for building reactive web apps, and then we used newsapi to return JSON search results for current news and top headlines. After data preprocessing, we displayed the contents based on the keywords and the condition that users gave.
 
 
