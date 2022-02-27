@@ -4,3 +4,9 @@ newsapi-python
 dash~=2.2.0
 dash-bootstrap-components
 requests~=2.27.1
+IPython
+nltk
+pandas
+numpy
+seaborn
+matplotlib
