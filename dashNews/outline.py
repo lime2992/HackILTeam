@@ -12,7 +12,7 @@ app = dash.Dash(
 )
 
 
-api = NewsApiClient(api_key='c3714ae8334b4794b63ffc101502f54a')
+api = NewsApiClient(api_key='XpNXWUpRZUrbsY7nZIW1r8LnW')
 top = api.get_top_headlines()
 
 items = [
