@@ -75,7 +75,7 @@ def updatePage(n_clicks, searchVal, countryVal):
     ])]
 
     for i in range(10):
-        hold_tweet_list.append(dbc.ListGroupItem(tweets[i]['name'], href=tweets[0]['url']))
+        hold_tweet_list.append(dbc.ListGroupItem(tweets[i]['name'], href=tweets[i]['url']))
 
     return news_articles, hold_tweet_list, new_title, outline.generateChart(top)
 
